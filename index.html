@@ -1,0 +1,938 @@
+<p><big><big><b>
+    ラビットチャレンジ E資格受験講座
+</b></big></big></p>
+<p><big><big><b>
+    深層学習要約
+</b></big></big></p>
+<p><big><big><b>
+＊DAY1
+</b></big></big></p>
+<ol>
+<p>
+<big>
+<li>入力層～中間層</li>
+</big>
+</p>
+<p>
+ニューラルネットワークにおける第0層目を入力層、最終層の出力層と入力層を除いた間を中間層と呼ぶ。中間層がない場合や複数にわたる場合もある。<br>
+入力層での各入力と重み係数の線形結合にバイアスを加え、活性化関数を有する中間層を通り、そのノード数に応じた分の信号を出力層に伝える。<br>
+入力層における重みは各入力の重要性を調整する役割があり、バイアスはそのニューロンの発火のしやすさを調整する意味がある。<br>
+</p>
+<p>
+<big>
+<li>活性化関数</li>
+</big>
+</p>
+<p>
+入力信号の総和がどのように活性化するかを決定する役割がある。活性化関数は非線形関数である必要がある。<br>
+線形関数の場合、活性化関数の出力もまたその入力に対する線形関数となり、層を深くする意味がなくなるためである。<br>
+代表的な活性化関数として、ステップ関数、シグモイド関数、ReLU関数が挙げられる。ステップ関数は0~1の間を表現できないため<br>
+線形分離可能なもののみしか適用できない。シグモイド関数では絶対値が大きい値になるほど出力の変化が微小となり勾配消失問題を引き起こすことが課題である。<br>
+したがって、これらの課題が解消できるReLU関数が最も使われている。<br>
+</p>
+<p>
+<big>
+<li>出力層</li>
+</big>
+</p>
+<p>
+入力層から中間層を通って導かれる出力と訓練データと誤差を誤差関数によって算出する。代表的な誤差関数として二乗平均誤差、交差エントロピーが挙げられる。<br>
+学習当たりの誤差としてサイクルごとの誤差を積算して算出する方法もある。出力層にも中間層と同様に活性化関数を持つが意味合いが異なる。<br>
+中間層は閾値の前後で信号の強弱を調整するのに対して、出力層では信号の比率はそのままに変換する。<br>
+活性化関数としては二乗関数他、ソフトマックス関数、恒等写像が挙げられる。誤差関数としては、恒等写像では二乗平均誤差、他では交差エントロピーが使用される。<br>
+</p>
+<big>
+<li>勾配降下法</li>
+</big>
+<p>
+深層学習では誤差を最小にするためのパラメータを見つけることが目的であり、出力層で得られた訓練データとの誤差をパラメータにフィードバックさせる必要がある。<br>
+誤差関数の勾配を用いて、誤差が最小になるように収束させる手法が勾配降下法である。誤差計測の際、ランダムに抽出した誤差を用いる手法を確率的勾配降下法と呼ぶ。<br>
+データ多い場合に計算コストを軽減できることや局所極小解に収束するリスクを軽減できるといったメリットがある。<br>
+また、ランダムに分割したデータの集合のサンプル平均誤差を用いる手法をミニバッチ勾配降下法と呼ぶ。集合をランダム化するため確率的勾配降下法のメリットを損なわず<br>
+集合で処理することで計算機の資源を有効活用できる。（CPUを利用したスレッドの並列化やGPUを利用したSIMD並列化）<br>
+</p>
+<p>
+<big>
+<li>誤差逆伝播法</li>
+</big>
+<p>
+勾配を求めるためには、各パラメータそれぞれの誤差と微小な前後±hとの差を算出するため、それぞれを求めるための再帰的な順伝播処理を行う必要があり計算負荷が大きい。<br>
+このような数値微分のデメリットを解消する手段として誤算逆伝播法を利用する。誤差逆伝播法とは、算出された誤差を出力層側から順に微分し、前の層へと伝播する手法である。<br>
+誤差から直接微分値を算出できる活性化関数の利点を活かして計算負荷を抑えている。<br>
+</p>
+</ol>
+<br>
+<p><big>
+   深層学習 DAY1 実装演習レポートリンク
+</big></p>
+<p style="padding-left:2em">
+順伝播
+</p>
+<p style="padding-left:2em">
+    <a
+        href="https://drive.google.com/file/d/1JH3t0VLOVc-T8B6Snzrp2cAGdXZ8c-Qx/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1JH3t0VLOVc-T8B6Snzrp2cAGdXZ8c-Qx/view?usp=sharing
+    </a>
+</p>
+<p style="padding-left:2em">
+順伝播と逆伝播
+</p>
+<p style="padding-left:2em">
+    <a
+        href="https://drive.google.com/file/d/1MjkESukNjMSs9TgINWf1GRXePxKiru0Q/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1MjkESukNjMSs9TgINWf1GRXePxKiru0Q/view?usp=sharing
+    </a>
+</p>
+<p style="padding-left:2em">
+確率的勾配降下法
+</p>
+<p style="padding-left:2em">
+    <a
+        href="https://drive.google.com/file/d/1gNldT0XU_ikfsyl5sTC4cMgra3Qqchp5/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1gNldT0XU_ikfsyl5sTC4cMgra3Qqchp5/view?usp=sharing
+    </a>
+</p>
+<p style="padding-left:2em">
+MINST
+</p>
+<p style="padding-left:2em">
+    <a
+        href="https://drive.google.com/file/d/1SLpEMorcq4-ZqpIOJjWq22qtUA9ltbYc/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1SLpEMorcq4-ZqpIOJjWq22qtUA9ltbYc/view?usp=sharing
+    </a>
+</p>
+<br>
+<p><big>
+   確認テスト要約
+</big></p>
+<ol>
+<p>
+<li>ディープラーニングは、結局何をやろうとしているか2行以内で述べよ。また、次の中のどの値の最適化が最終目的か。<br>
+①入力値[ X]②出力値[ Y]③重み[W]④バイアス[b]⑤総入力[u] ⑥中間層入力[ z]⑦学習率[ρ]</li>
+</p>
+<p>
+ディープラーニングは③重みを最適化することで①入力値と④バイアスで構成される学習モデルを構築することを最終目的としている。よって、回答は①③④を選択
+</p>
+<p>
+<li>u=x*w+bをPythonで書け。</li>
+</p>
+<p>
+u1 = np.dot(x, W1) + b1
+</p>
+<p>
+<li>1-1のファイルから中間層の出力を定義しているソースを抜き出せ。</li>
+</p>
+<p>
+z = functions.relu(u)
+</p>
+<p>
+<li>線形・非線形の違いの説明。</li>
+</p>
+<p>
+微分した値が定数かどうか。線形関数では多層化による恩恵を得られない。（出力の線形のまま）、非線形関数により各層に意味を持たすことができる。
+<p>
+<li> 配布されたソースコードより該当する箇所を抜き出せ。</li>
+</p>
+<p align="left">
+    z1 = functions.sigmoid(u)
+</p>
+<p>
+<li>なぜ、引き算でなく二乗するか述べよ。</li>
+</p>
+<p>
+解析上、誤差を互いに独立な確率変動として扱うため。
+</p>
+<p>
+<li>誤差計算の1/2はどういう意味を持つか述べよ。</li>
+</p>
+<p>
+    微分すると、2乗による係数2が表れ、1/2をかけることで相殺できる。出力層の各ノードの比率を変えない範囲で、逆伝播で必要な誤差の微分値を容易に計算できるようにするため。
+</p>
+<p>
+<li>①～③の数式に該当するソースコードを示し、一行づつ処理の説明をせよ。</li>
+</p>
+<p>
+①：np.exp(x) /np.sum(np.exp(x), axis=0)：ソフトマックス関数の計算　(②÷③)<br>
+②：np.exp(x)：exp^xの算出<br>
+③：np.sum(np.exp(x), axis=0)：exp^xの総和の計算<br>
+</p>
+<p>
+<li>①②の数式に該当するソースコードを示し、一行づつ処理の説明をせよ。</li>
+</p>
+<p>
+①② -np.sum(np.log(y[np.arange(batch_size), d] + 1e-7)) / batch_size <br>
+交差エントロピーの計算
+</p>
+<p>
+<li>勾配降下法ソースコードの抽出。</li>
+</p>
+<p>
+network[key] -= learning_rate * grad[key]<br>
+差分を更新することで実現
+</p>
+<p>
+<li>オンライン学習とは何か2行でまとめよ。</li>
+</p>
+<p>
+学習中にも追加のデータが入ってくるような場合において、これらのデータを逐次的に処理（学習）できる機械学習手法のこと。
+</p>
+<p>
+<li>重み更新において微分値に学習率を掛けて減算する意味。</li>
+</p>
+<p>
+重みを誤差の微分値に負の定数を掛けることで誤差をなくすように重みの値を更新している。
+</p>
+<p>
+<li>誤差逆伝播法では不要な再帰的処理を避ける事が出来る。既に行った計算結果を保持しているソースコードを抽出せよ。</li>
+</p>
+<p>
+delta1 = np.dot(delta2, W2.T) * functions.d_sigmoid(z1) 微分を求めるのに、出力z1の値を用いて算出している。
+</p>
+</ol>
+<br>
+<p><big><big><b>
+＊DAY2
+</b></big></big></p>
+<ol>
+<big>
+<li>勾配消失問題</li>
+</big>
+<p>
+誤差逆伝播法で下位層に進むにつれ、勾配がゆるやかになっていき、その結果勾配降下法による更新では下位層のパラメータがほとんど変わらず停滞し最適値に収束しない状態のことである。<br>
+解決策として、①活性化関数の選定、②重みの初期値設定、③バッチの正規化が挙げられる。①については、活性化関数はシグモイド関数の代わりにReLU関数を採用、<br>
+②については、重み要素を前の層のノード数の平方根で除した値とするXavierとそれに√2をかけたもの初期値とするHe<br>
+③について、活性化関数に値を渡す前後に正規化（バッチ内のデータをt分布のように表現したもの＝バッチ正規化）することで勾配消失問題を解消する。<br>
+</p>
+<big>
+<li>学習率最適化手法</li>
+</big>
+<p>
+学習率は値が大きいと最適値に収束せず発散する課題があり、小さいと収束に時間がかかることや大域的局所最適値に収束しづらいといった課題がある。<br>
+この学習率を最適なものとするための方法を学習率最適化手法と呼ぶ。次のような方法がある。<br>
+</p>
+<p>
+    〇　モメンタム
+</p>
+<p>
+誤差をパラメータで微分したものと学習率の積を減算し、現在の重みに前回の重みを減算した値と慣性の積を加算する手法。（慣性＝モメンタム）<br>
+メリット：大域的最適解が得られる、最適値までの時間が早い。
+</p>
+<p>
+    〇　AdaGrad
+</p>
+<p>
+誤差をパラメータで微分したものと再定義した学習率の積を減算する手法。<br>
+メリット：勾配の緩やかな斜面に対して最適値に近づくことができる。学習率が小さくなるため鞍点問題（ある面では極小だがある面では極大）を引き起こす可能性がある。
+</p>
+<p>
+    〇　RMSProp
+</p>
+<p>
+    誤差をパラメータで微分したものと再定義した学習率の積を減算する手法。<br>
+    メリット：大域的最適が得られ、ハイパーパラメータと呼ばれる部分の調整が必要ない場合が多い。
+</p>
+<p>
+    〇　Adam
+</p>
+<p>
+    モメンタムとRMSPropの良いとこ取り。モメンタムの指数関数的減衰平均とRMSPropの勾配の2乗の指数関数的減衰平均を含んだ最適アルゴリズム。
+</p>
+<p>
+<big>
+<li>過学習</li>
+</big>    
+</p>
+<p>
+テスト誤差と訓練誤差とで学習曲線が乖離する現象。パラメータ数やノードが多い場合やパラメータの値が適切でないといったネットワークの自由度が高いことで生じる。<br>
+過学習は次のような手法で抑制する。
+</p>
+<p>
+    〇　正則化
+</p>
+<p>
+重みが大きくなることが過学習の一因であることに対し、誤差に正則化項（pノルム）を加算することで、重みが過学習となる値以下なるように抑制する方法。
+</p>
+<p>
+    〇　ドロップアウト
+</p>
+<p>
+ノード数が多いことが過学習の一因であることに対し、ランダムにノードを削除して学習させる方法。データ量を変化させずに異なるモデルを学習させることができる。
+</p>
+<p>
+<big>
+<li>畳み込みニューラルネットワーク</li>
+</big>    
+</p>
+<p>
+畳み込み層とプーリング層によって構成されるニューラルネットワークのこと。
+</p>
+<p>
+    〇　畳み込み層
+</p>
+<p>
+3次元（縦・横・奥行き（色など））の空間情報を学習できるような層で主な演算処理方法として次のようなものがある。
+</p>
+<p>
+バイアス：各データそれぞれに値を等しく加算（オフセット）する処理。発火のしやすさの調整。<br>
+パディング：出力サイズを調整するため、<em>畳み込み層</em>の処理を行う前に、入力データの周囲に固定のデータを埋める処理。<br>
+ストライド：畳み込みの適用間隔のようなもので出力サイズを調整する処理。<br>
+チャンネル：複数のフィルタに対応する畳み込み層内のニューロンセットの呼称。<br>
+</p>
+<p>
+    〇　プーリング層
+</p>
+<p>
+対象の領域に対して、最大値・平均を取得する処理。フィルタの位置ずれを吸収するように機能する。
+</p>
+<p>
+<big>
+<li>最新のCNN</li>
+</big>    
+</p>
+AlexNet：2012年のImageNetコンペで優勝したトロント大学が開発したネットワーク。畳み込み層5層にプーリング層3層という構成。高い認識力が特徴である。<br>
+過学習を防ぐため、サイズ4096の全結合層の出力にドロップアウトを使用している。
+</p>
+</ol>
+<br>
+<p><big>
+   深層学習 DAY2 実装演習レポートリンク
+</big></p>
+<p style="padding-left:2em">
+分類問題
+</p>
+<p style="padding-left:2em">
+    <a
+        href="https://drive.google.com/file/d/1GOq5VGWAToAFRN-_JRLRvguJxDG7NY-u/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1GOq5VGWAToAFRN-_JRLRvguJxDG7NY-u/view?usp=sharing
+    </a>
+</p>
+<p style="padding-left:2em">
+勾配消失問題
+</p>
+<p style="padding-left:2em">
+    <a
+        href="https://drive.google.com/file/d/1GJkpq_ydi-dnJrCL5SdY7DEPgUPEPEJl/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1GJkpq_ydi-dnJrCL5SdY7DEPgUPEPEJl/view?usp=sharing
+    </a>
+</p>
+<p style="padding-left:2em">
+勾配消失問題（隠れ層のサイズ変更）
+</p>
+<p style="padding-left:2em">
+    <a
+        href="https://drive.google.com/file/d/14W0gASQbW3Egu-QBOR13IxqjXduwoFll/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/14W0gASQbW3Egu-QBOR13IxqjXduwoFll/view?usp=sharing
+    </a>
+</p>
+<p style="padding-left:2em">
+バッチ正規化
+</p>
+<p style="padding-left:2em">
+    <a
+        href="https://drive.google.com/file/d/1fSLmi8UjK_78n-aBlYoytHd1Sj5oYCle/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1fSLmi8UjK_78n-aBlYoytHd1Sj5oYCle/view?usp=sharing
+    </a>
+</p>
+<p style="padding-left:2em">
+学習最適化
+</p>
+<p style="padding-left:2em">
+    <a
+        href="https://drive.google.com/file/d/1b9jpm2qdqDYMg74xW1Y_dRUM6EsErpJI/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1b9jpm2qdqDYMg74xW1Y_dRUM6EsErpJI/view?usp=sharing
+    </a>
+</p>
+<p style="padding-left:2em">
+過学習
+</p>
+<p style="padding-left:2em">
+    <a
+        href="https://drive.google.com/file/d/1BN4UPNCfEutTw4xS6CxIwm9vnTw2oLJT/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1BN4UPNCfEutTw4xS6CxIwm9vnTw2oLJT/view?usp=sharing
+    </a>
+</p>
+<p style="padding-left:2em">
+畳み込みネットワーク
+</p>
+<p style="padding-left:2em">
+    <a
+        href="https://drive.google.com/file/d/1sL-ro4NLsuvXEwV4ZrRi6YJ3nGjLPTTM/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1sL-ro4NLsuvXEwV4ZrRi6YJ3nGjLPTTM/view?usp=sharing
+    </a><br>
+    <a
+        href="https://drive.google.com/file/d/1T6xrTeoX3FGGmyhwWjZyGTREi45KWNNi/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1T6xrTeoX3FGGmyhwWjZyGTREi45KWNNi/view?usp=sharing
+    </a>
+</p>
+<p style="padding-left:2em">
+Deep CNN
+</p>
+<p style="padding-left:2em">
+    <a
+        href="https://drive.google.com/file/d/1pLWVqUfrJWd5D8rAw7B-ot8LPaG961JV/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1pLWVqUfrJWd5D8rAw7B-ot8LPaG961JV/view?usp=sharing
+    </a>
+</p>
+</ol>
+<br>
+<p><big>
+    確認テスト要約
+</big></p>
+<ol>
+<p>
+<li>連鎖律の原理を使い、dz/dxを求めよ。z = t^2,  t = x + y </li>
+</p>
+<p>
+連鎖律：dz/dx=dz/dt*dt/dx<br>
+それぞれの微分値：dz/dt=2t, dt/dx=1<br>
+以上より、dz/dx=2t=2x+2y
+</p>
+<p>
+<li>シグモイド関数を微分した時、入力値が0の時に最大値をとる。その値として正しいものを選択肢から選べ。</li>
+</p>
+<p>
+f=Sigmoid(x) = 1/(1+exp(-x))<br>
+df/dx = (1-f) *f = (1-1/(1+exp(-x))*1/(1+exp(-x))<br>
+x=0において、<br>
+|df/dx|x=0 = (1-1/2*1/2) = 0.25 よって答えとなる選択肢は(2)
+</p>
+<p>
+<li>重みの初期値に0を設定すると、どのような問題が発生するか。簡潔に説明せよ。</li>
+</p>
+<p>
+重みが0になると、中間層（あるいは出力層）にその入力要素を考慮することができない。その結果、逆伝播によるパラメータ算出の収束の鈍化により、学習時間が長時間化すると考えられる。
+</p>
+<p>
+<li>一般的に考えられるバッチ正規化の効果を2点挙げよ。</li>
+</p>
+<p>
+① 入力値が極小極大化せず安定して計算ができ、入力データが学習の度に大きく変わることを防ぐ。<br>
+② 層ごとの入力の偏りを抑え、各層の効果を安定化できる。
+</p>
+<p>
+<li>モメンタム・AdaGrad・RMSPropの特徴をそれぞれ簡潔に説明せよ。</li>
+</p>
+<p>
+①モメンタム：誤差をパラメータで微分したものと学習率の積を減算し、現在の重みに前回の重みを減算した値と慣性の積を加算する手法。（慣性＝モメンタム）<br>
+メリット：大域的最適解が得られる、最適値までの時間が早い。<br>
+②AdaGrad：誤差をパラメータで微分したものと再定義した学習率の積を減算する手法。<br>
+メリット：勾配の緩やかな斜面に対して最適値に近づくことができる。学習率が小さくなるため鞍点問題（ある面では極小だがある面では極大）を引き起こす可能性がある。<br>
+③RMSProp：誤差をパラメータで微分したものと再定義した学習率の積を減算する手法。<br>
+メリット：大域的最適が得られ、ハイパーパラメータと呼ばれる部分の調整が必要ない場合が多い。
+</p>
+<p>
+<li>リッジ回帰の特徴として正しい選択肢を選ぶ。</li>
+</p>
+<p>
+リッジ回帰とは過学習を防ぐため線形回帰に正則化項(ペナルティ項)としてL2ノルムを導入したモデルのこと。隠れ層に対して正則化項を加える。よって（d）を選択。
+</p>
+<p>
+<li>L1正則化を表しているグラフはどちらか答えよ。</li>
+</p>
+<p>
+1－ノルム→|x|+|y|=1よってグラフの右側を選択。
+</p>
+<p>
+<li>サイズ6×6の入力画像を、サイズ2×2のフィルタで畳み込んだ時の出力画像のサイズを答えよ。なおストライドとパディングは1とする。</li>
+</p>
+<p>
+横方向について、8個（パディングを含む）の要素に対して、２のフィルタをストライド1で動かすと、出力は7つ生成される。縦方向も同様である。<br>
+以上より、サイズは7×7である。
+</p>
+</ol>
+<br>
+<p><big><big><b>
+＊DAY3
+</b></big></big></p>
+<ol>
+<p>
+<big>
+<li>再帰型ニューラルネットワークRNN</li>
+</big>
+</p>
+<p>
+音声データやテキストデータのように時系列データに対応可能なネットワークのこと。（時系列データとは一定間隔観察され、統計的依存関係があるデータを指す。）<br>
+過去のデータを保持し入力として加える再帰構造として設計されている。RNNにおいてパラメータ調整する誤差逆伝播法をBPTTと呼ぶ。中間層、出力層にかかる重みの他に<br>
+中間層の出力に1つ前の時系列の中間層の出力データに3つ目の重みとして加え、それを活性化関数の入力として取り入れることで、一つ前の時系列要素を含んだネットワークとなっている。
+</p>
+<p>
+<big>
+<li>LSTM</li>
+</big>
+</p>
+<p>
+長い時系列では勾配が消失し学習が困難であるというRNNの課題に対して、活性化関数ではなくネットワーク自体の構造を変えることでRNNの勾配消失問題を解決する手法。<br>
+CECと呼ばれるユニットに過去データを線形結合で保持することで逆伝播による勾配消失や勾配爆発問題を抑制する。CECの過去データ（セル状態）が長期記憶を<br>
+出力ゲートからの出力（隠れ状態）が短期記憶を担うことから、Long-Short Time Modelと呼ばれる。
+</p>
+<p>
+<big>
+<li>GRU</li>
+</big>
+</p>
+<p>
+パラメータ数が多く、計算負荷が高くなるというLSTMの課題を解決する役割を担う。LSTMにおける忘却ゲートと入力ゲートを単一の更新ゲートにマージすることにより、<br>
+隠れ状態の出力のみとすることで、計算負荷を抑制している。
+</p>
+<p>
+<big>
+<li>双方向RNN</li>
+</big>
+</p>
+<p>
+過去の情報だけでなく未来の情報を加味することでモデルパラメータ精度向上を図ったモデルのこと。RNNのように過去情報を時系列の沿って取り入れたものと、<br>
+反対に未来の情報を入力として過去のモデルに取り入れた2系統で中間層を構築したもの。機械翻訳や文書推敲などに用いられる。
+</p>
+<p>
+<big>
+<li>Seq2Seq</li>
+</big>
+</p>
+<p>
+RNNを用いたEncoder-Decoderモデルの一種であり、機械翻訳などのモデルに使われるもの。次のような機能を持つ。
+</p>
+<p>
+    〇　Encoder RNN
+</p>
+<p>
+テキストデータを単語などのトークンに区切って渡すもの。
+トークンごとにIDに割り当て（Taking）、IDから分散表現ベクトルに変換（Embedding）、ベクトルを順々にRNNに入力する（hidden state）。<br>
+</p>
+<p>
+    〇　Decoder RNN
+</p>
+<p>
+出力データを単語などのトークンごとに生成するシステムの処理のこと。
+</p>
+<p>
+    〇　HRED
+</p>
+<p>
+1つ前の発話の内容を踏まえて次の発話を生成するようにする機能。（Seq2Seqでは文脈が汲めない。）
+</p>
+<p>
+    〇　Context RNN
+</p>
+<p>
+Encoderのまとめた文章の系列から、これまでの会話コンテキスト全体を表すベクトルに変換する機能。
+</p>
+<p>
+    〇　VHRED
+</p>
+<p>
+HREDにVAEの潜在変数の概念を追加することで、HREDに多様性を持たせたもの。会話の流れを考慮できないことや短い文章の発話になりやすいとったHREDの課題を補っている。
+</p>
+<p>
+    〇　オートエンコーダ
+</p>
+<p>
+    入力されたデータを一度圧縮して、重要な特徴量だけを残した後、再度もとの次元に復元処理する機能。教師なし学習の一つ。
+</p>
+<p>
+    〇　VAE
+</p>
+<p>
+    変分ベイズ推定法の一つで、潜在変数を確率分布に落とし込んで、構造がどのような状態かを可視化したもの。
+</p>
+<p>
+<big>
+<li>Word2Vec</li>
+</big>
+</p>
+<p>
+RNNでは単語のように可変なものをニューラルネットワークの入力に使用できない。そのため、データを固定長形式で表す必要がある。（固定長形式で単語を表すことを単語の分散表現と呼ぶ。）<br>
+Word2Vecでは、単語の意味は周囲の単語によって形成されるという分布仮説に基づいたモデルで、単語ベクトル（one-hotベクトル）という形式を採用することにより、現実的な計算速度とメモリ量で<br>
+大規模データの分散表現学習できる。
+</p>
+<p>
+<big>
+<li>Attention Mechanism</li>
+</big>
+</p>
+<p>
+RNNなどは、文章が長くなるほど、高い次元の固定長ベクトルが必要で、その分入力数が多くなる。Attention Mechanismでは入力と出力でどの単語が関連しているかの関連度を学習することで、<br>
+例えば翻訳等において長文の表現精度を向上させている。
+</p>
+</ol>
+<br>
+<p><big>
+   深層学習 DAY3 実装演習レポートリンク
+</big></p>
+<p style="padding-left:2em">
+RNN
+</p>
+<p style="padding-left:2em">
+    <a
+        href="https://drive.google.com/file/d/1jvo3K9YygCBvRVcYTiT1yN3X67GBjBaV/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1jvo3K9YygCBvRVcYTiT1yN3X67GBjBaV/view?usp=sharing
+    </a>
+</p>
+<p style="padding-left:2em">
+SIN予測
+</p>
+<p style="padding-left:2em">
+    <a
+        href="https://drive.google.com/file/d/1oKgTrX5FF6iKJzDoh3dSWq8Vm2GhMbwI/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1oKgTrX5FF6iKJzDoh3dSWq8Vm2GhMbwI/view?usp=sharing
+    </a>
+</p>
+<p style="padding-left:2em">
+RNN Chainer
+</p>
+<p style="padding-left:2em">
+    <a
+        href="https://drive.google.com/file/d/1ToJEQUB8DQTYWw8o9c7dlrwzroHWlY12/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1ToJEQUB8DQTYWw8o9c7dlrwzroHWlY12/view?usp=sharing
+    </a>
+</p>
+<p style="padding-left:2em">
+RNN keras
+</p>
+<p style="padding-left:2em">
+    <a
+        href="https://drive.google.com/file/d/1A9TWMCsttrSm2K_ISCW1gb3WupeZVqGp/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1A9TWMCsttrSm2K_ISCW1gb3WupeZVqGp/view?usp=sharing
+    </a>
+</p>
+<p style="padding-left:2em">
+RNN np
+</p>
+<p style="padding-left:2em">
+    <a
+        href="https://drive.google.com/file/d/1tER5kSRfaHv_Vj7YBiI5BG20UQwPsGlm/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1tER5kSRfaHv_Vj7YBiI5BG20UQwPsGlm/view?usp=sharing
+    </a>
+</p>
+<p style="padding-left:2em">
+RNN LSTM TensorFlow
+</p>
+<p style="padding-left:2em">    <a
+        href="https://drive.google.com/file/d/1Qwq9WWPzPCrWD9mzDpIRj3DVAF_XMn5M/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1Qwq9WWPzPCrWD9mzDpIRj3DVAF_XMn5M/view?usp=sharing
+    </a>
+</p>
+<p style="padding-left:2em">
+RNN LSTM PyTorch
+</p>
+<p style="padding-left:2em">
+    <a
+        href="https://drive.google.com/file/d/1qWkb-0TyfxigOkRgh3On6SFjwDfToU5m/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1qWkb-0TyfxigOkRgh3On6SFjwDfToU5m/view?usp=sharing
+    </a>
+</p>
+<p style="padding-left:2em">
+為替予測
+</p>
+<p style="padding-left:2em">    <a
+        href="https://drive.google.com/file/d/1qWkb-0TyfxigOkRgh3On6SFjwDfToU5m/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/1qWkb-0TyfxigOkRgh3On6SFjwDfToU5m/view?usp=sharing
+    </a><br>
+    <a
+        href="https://drive.google.com/file/d/14Yz1JIMk119mkhgrF9eKuSOa1hFfw42V/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/14Yz1JIMk119mkhgrF9eKuSOa1hFfw42V/view?usp=sharing
+    </a>
+</p>
+<p style="padding-left:2em">
+Word2Vec
+</p>
+<p style="padding-left:2em">    <a
+        href="https://drive.google.com/file/d/15Zvp3PUj0AZx0DstO6kDeGXM09nbOmp9/view?usp=sharing"
+    >
+        https://drive.google.com/file/d/15Zvp3PUj0AZx0DstO6kDeGXM09nbOmp9/view?usp=sharing
+    </a>
+</p>
+<br>
+<p><big>
+    確認テスト要約
+</big></p>
+<ol>
+<p>
+<li>サイズ5×5の入力画像を、サイズ3×3のフィルタで畳み込んだ時の出力画像のサイズを答えよ。なおストライドは2、パディングは1とする</li>
+</p>
+<p>
+横方向について、7個（パディングを含む）の要素に対して、3のフィルタをストライド2で動かすと、出力は3つ生成される。縦方向も同様である。<br>
+以上より、サイズは3×3である。
+</p>
+<p>
+<li>RNNのネットワークには大きくわけて3つの重みがある。1つは入力から現在の中間層を定義する際にかけられる重み、1つは中間層から出力を定義する際にかけられる重みである。<br>
+残り1つの重みについて説明せよ。</li>
+</p>
+<p>
+中間層、出力層にかかる重みの他に、中間層の出力に1つ前の時系列の中間層の出力データを3つ目の重みとして加える。<br>
+過去の情報を活性化関数の入力として取り入れることで、時間の流れを含んだニューラルネットワーク構成となっている。
+</p>
+<p>
+<li>連鎖律の原理を使い、dz/dxを求めよ。</li>
+</p>
+<p>
+→ Day2に記載のとおり。
+</p>
+<p>
+<li>y1をx・s0・s1・win・w・woutを用いて数式で表せ。※バイアスは任意の文字で定義せよ。</li>
+</p>
+<p>
+y1=wout*z1=wout*s1(win*x+w*s0+b)+c （bとcはバイアス)
+</p>
+<p>
+<li>シグモイド関数を微分した時、入力値が0の時に最大値をとる。その値として正しいものを選択肢から選べ。</li>
+</p>
+<p>
+ → Day2に記載のとおり。
+</p>
+<p>
+<li>以下の文章をLSTMに入力し空欄に当てはまる単語を予測したいとする。文中の「とても」という言葉は<br>
+空欄の予測においてなくなっても影響を及ぼさないと考えられる。このような場合、どのゲートが作用すると考えられるか。<br>
+「映画おもしろかったね。ところで、とてもお腹が空いたから何か____。」</li>
+</p>
+<p>
+「とても」という言葉が予測に影響はないと判断したタイミングで、忘却ゲートを通し、情報保有させない。
+</p>
+<p>
+<li>LSTMとCECが抱える課題について、それぞれ簡潔に述べよ。</li>
+</p>
+<p>
+LSTMの課題：忘却ゲートを持たない場合、多くの情報を長期記憶する必要があること、蓄積したデータの影響で大きな状況の変化に対応できないこと。<br>
+CECの課題：パラメータ数が多く計算負荷が大きい。
+</p>
+<p>
+<li>LSTMとGRUの違いを簡潔に述べよ。</li>
+</p>
+<p>
+LSTMは忘却ゲート、入力ゲート、出力ゲートの3つゲートを持つのに対し、GRUはLSTMの忘却ゲートと入力ゲートマージした処理構成となっている。<br>
+これにより、パラメータ数が多く、計算負荷が高くなるというLSTMの課題解消を図っている。
+</p>
+<p>
+<li>下記の選択肢から、Seq2Seqについて説明しているものを選べ。</li>
+</p>
+<p>
+（1）時刻に関して順方向と逆方向のRNNを構成し、それら2つの中間層表現を特徴量として利用するものである。<br>
+（2）RNNを用いたEncoder-Decoderモデルの一種であり、機械翻訳などのモデルに使われる。<br>
+（3）構文木などの木構造に対して、隣接単語から表現ベクトル（フレーズ）を作るという演算を再帰的に行い（重みは共通）、文全体の表現ベクトルを得るニューラルネットワークである。<br>
+（4）RNNの一種であり、単純なRNNにおいて問題となる勾配消失問題をCECとゲートの概念を導入することで解決したものである。
+</p>
+<p>
+    (1)は双方向RNN、(3)はWord2Vec、(4)はLSTM、よって(2)がSeq2Seq（記述通り）
+</p>
+<p>
+<li>Seq2SeqとHRED、HREDとVHREDの違いを簡潔に述べよ。</li>
+</p>
+<p>
+Seq2SeqとHREDの違い：文脈の有無の違い。HREDは1つ前の発話の内容を踏まえて次の発話を生成するようにする機能であり、Seq2Seqには文脈がない。<br>
+HREDとVHREDの違い：会話の流れを汲めるかの違い。VHREDはHREDにVAEの潜在変数の概念を追加することで、HREDに多様性を持たせ、会話の流れを考慮することができる。<br>
+対して、HREDは会話の流れに応じた出力ができない。
+</p>
+<p>
+<li>VAEに関する下記の説明文中の空欄に当てはまる言葉を答えよ。<br>
+自己符号化器の潜在変数に____を導入したもの。</li>
+</p>
+<p>
+確率分布
+</p>
+<p>
+<li>RNNとWord2Vec、Seq2SeqとAttentionの違いを簡潔に述べよ。</li>
+</p>
+<p>
+RNNとword2vecの違い：文章データの構造の違い。RNNでは単語のように可変なものをニューラルネットワークの入力に使用できず、データを固定長形式で表す必要がある。<br>
+Word2Vecでは、単語の意味は周囲の単語によって形成されるという分布仮説に基づいており、データ長にとらわれない。<br>
+Seq2SeqとAttentionの違い：同様に文章データ構造の違い。RNNを用いたseq2seqでは、文章が長くなるほど高い次元が必要でメモリが増えるが、<br>
+Attentionは単語同士の関連度を学習させることで長文表現を可能にしている。
+</p>
+</ol>
+<br>
+<p><big><big><b>
+＊DAY4
+</b></big></big></p>
+<ol>
+<p><big>
+<li>強化学習</li>
+</big></p>
+<p>
+システム自身が行動の結果として与えられる利益をもとに行動を決定する原理を改善することで最適なシステム制御を実現する機械学習手法のこと。<br>
+通常の機械学習（教師あり・なし）では、データに含まれるパターンを見つけ出し、データから予測することが目標であるのに対して、<br>
+強化学習では優れた方策を見つけることをゴールとしている。具体的には、次のような手法がある。
+</p>
+<p>
+   〇　Q学習
+</p>
+<p>
+行動価値関数を行動するごと更新し学習する手法。
+</p>
+<p>
+   〇　関数近似法
+</p>
+<p>
+価値関数や方策関数を既存の関数に近似する手法。価値関数には状態価値関数と行動価値観数の2種類存在し、前者はある状態の価値に着目する場合、<br>
+後者は状態と価値とを組み合わせた価値に着目する場合に用いられる。方策関数とはある状態でどのような行動をとるのか確率を与える関数のこと。
+</p>
+<p>
+   〇　AlphaGo
+</p>
+<p>
+プロ囲碁棋士に初めて勝利した囲碁プログラムである。48チャンネルからソフトマックス関数により19×19の着手予想確率を出力するものをPolicyNet<br>
+49のチャンネルから勝利確率としてTanH関数を通して-1～1で出力するものをValueNetと呼ぶ。
+</p>
+<p>
+    〇　モンテカルロ木探索
+</p>
+<p>
+コンピュータ囲碁ソフトでは現在もっとも有効とされており、盤面評価値に頼らず勝敗のみの末端評価値に着目した探索法のこと。
+</p>
+<p><big>
+<li>分散深層学習</li>
+</big></p>
+<p>
+深層学習の計算高速化に対応するため、複数の計算資源を使用して並列的にニューラルネットワークを構成することで効率の良い学習を行えるようにしたもの。<br>
+手段としては、データの並列化、モデルの並列化、GPUの使用がある。
+</p>
+<p>
+    〇　データ並列化
+</p>
+<p>
+親モデルを各ワーカーに子モデルとしてコピーし、データを分割する。分割したデータを元に各ワーカー（計算資源）に計算させる。パラメータの合わせ方で同期型か非同期型かに分けられる。
+</p>
+<p>
+同期型：各ワーカーによって計算された勾配を平均し親モデルのパラメータを更新する手法。各ワーカーの計算結果が出揃うまで待つ必要がある。<br>
+非同期型：パラメータサーバを設け、子モデルごとにパラメータ更新を行うことで、各ワーカーの計算を待たず同期型より早く処理することができる。<br>
+ただし、非同期型では最新のパラメータを利用できないので学習が不安定になりやすい特徴があり、現在では同期型が主流となっている。
+</p>
+<p>
+    〇　モデルの並列化
+</p>
+<p>
+親モデルを各ワーカーに分割し、それぞれのモデルを学習させ、全ての学習が終わった後に一つのモデルを復元する方法。スピードアップ効率はパラメータ数が<br>
+大きいほど高い。モデルが大きいときにモデル並列化を採用し、データが大きいときはデータ並列化を採用する。
+</p>
+<p>
+    〇　GPGPU
+</p>
+<p>
+グラフィック以外の用途で使用されるGPUの総称
+</p>
+<p>
+    〇　GPU
+</p>
+<p>
+比較的低性能なコアを多数有し、並列処理に優れたもの。ニューラルネットワークの計算高速化に寄与する。
+</p>
+<p><big>
+<li>モデルの軽量化</li>
+</big></p>
+<p>
+モデルの精度を維持しつつパラメータや低減する手法。代表的なものとして量子化、蒸留、プルーニングがある。
+</p>
+<p>
+    〇　量子化
+</p>
+<p>
+通常のパラメータである64bit浮動小数点を32bitなど下位の精度に落とすことで、メモリと演算処理の削減を行うもの。<br>
+メリットは、計算の高速化、省メモリ化対してデメリットは計算精度が低下することが挙げられる。<br>
+GPUなどに単精度、倍精度などで表現される。計算精度が低下するとはいえ、極端にbit数を落とさなければそこまで影響はない。
+</p>
+<p>
+    〇　蒸留
+</p>
+<p>
+規模の大きなモデルの知識を使い、軽量なモデル作成を行うことで計算コストを低減させる手法。<br>
+学習済みの精度の高いモデル（教師モデル）の知識を軽量なモデル（生徒モデル）へ継承させることで、軽量でありながら複雑なモデル実現できる。<br>
+また、少ない学習回数で高精度な結果を得ることが可能。
+</p>
+<p>
+    〇　プルーニング
+</p>
+<p>
+モデルの精度に寄与が少ないニューロンを削減することでモデルの軽量化・高速化を図ったもの。モデルを圧縮するという。<br>
+重みが閾値以下の場合のニューロンを削減して再学習を行う。当然であるが、閾値を上げるとモデルの精度は低くなる。
+</p>
+<p><big>
+<li>MobileNet</li>
+</big></p>
+<p>
+深層学習モデルは精度が良い反面、ネットワークが深くなり計算量が増え、その結果、計算リソースが増大しコストが高くなる。<br>
+MobileNetはDepthwise Convolution（カーネル処理のチャンネルとフィルタの軽量化）とPointwise convolution（カーネルサイズの軽量化）<br>
+という畳み込みニューラルネットワークによる処理方法を工夫することで軽量化、高速化、高精度化を実現している。
+</p>
+<p><big>
+<li>DensNet</li>
+</big></p>
+<p>
+複雑になると学習が難しくなる畳み込みニューラルネットワーク（CNN）の課題に対処したCNNアーキテクチャの一種である。<br>
+特徴マップに対しBatch正規化、ReLU関数による変換、3×3畳み込み層による処理の順で出力信号を生成し、その出力と入力特徴マップを足し合わせ、再帰的に計算させる。<br>
+成長率と呼ばれるハイパーパラメータが存在し、計算させるにつれチャンネル数が増加する。
+</p>
+<p><big>
+<li>BatchNorm</li>
+</big></p>
+<p>
+レイヤー間に流れるデータの分布をミニバッチ単位で平均0、分散1になるように正規化し、ニューラルネットワークにおける学習時間の短縮や初期値依存度の低減、過学習抑制させる。<br>
+バッチサイズが小さい条件では学習結果が収束しないことがあるが、対策として、Layer Normalizationと呼ばれる正規化手法を使うことが挙げられる。
+</p>
+<p><big>
+<li>LayerNorm</li>
+</big></p>
+<p>
+ミニバッチのようにレイヤー内をバッチで区切って正規化するのではなく、レイヤー全体で正規化すること。それぞれのサンプル全てのピクセルが同一分布に従うように変換処理を行う。<br>
+ミニバッチの数やサイズに依存せず、サイズを大きくとれるのでミニバッチよりも高い学習効果が期待できる。各サンプルのチャンネルごとに正規化したものをInstance Normと呼ぶ。<br>
+画像のスタイル転送やテクスチャ合成タスクなどに利用される。
+</p>
+<p><big>
+<li>WaveNet</li>
+</big></p>
+<p>
+時系列データに対して畳み込みを適用できるようにしたもの。Dilated Convolutionと呼ばれる手法で、層が深くなるにつれて畳み込むリンクを離すことでより時系列データの入力範囲を<br>
+広く取り効率的に学習できる。音声合成などに使用され、Googleアシスタントに採用されている。
+</p>
+<p><big>
+<li>Seq2seq（DAY3と同様：講義内容を踏まえやや表現を変更しました。）</li>
+</big></p>
+<p>
+入力系列をRNNで固定長ベクトル（内部状態ベクトル）に変換（Encode）し、そのベクトルを用いて文章を生成する（Decode）。EncoderとDecoder、2つのRNNで構成されるモデルのことをいう。<br>
+機械翻訳、文書要約、対話生成などに使われる。
+</p>
+<p><big>
+<li>Transformer</li>
+</big></p>
+<p>
+RNNは入力として限られた固定長ベクトルに落とし込むため、長い文章の翻訳精度が低い。Transformerでは長い文章でも翻訳精度が落ちないAttentionを用いたモデルで2017年に発表された。<br>
+LSTMに次ぐユニットと呼ばれている。RNNを用いずAttentionのみで構成され、計算量が少なく高速なモデルである。RNNを用いないため単語列の語順情報が必要になる。
+</p>
+<p><big>
+<li>物体検知</li>
+</big></p>
+<p>
+識別の程度で、分類、物体検知、意味領域分割、個体領域分割に分けられる。物体検知精度の評価には、分類問題の評価指標であるConfusionMatrixを用いる。<br>
+分類精度だけでなく物体認識位置精度も重要な要素である。位置精度の評価手法として、Bounding Boxの占める推定したBounding Boxと実物のBounding Boxとの<br>
+重複する部分の割合を指標とする方法がある。検知手法としては2段階検出器と1段階検出器に分類できる。前者は候補領域の検出とクラス推定を別々で行うのに対して<br>
+後者は同時に推定する。2つを比較したとき、2段階検出器の方がより検知精度が高いが、計算量多く負荷が大きい。
+</p>
+<p><big>
+<li>セグメンテーション</li>
+</big></p>
+<p>
+物体検知精度を上げるためには受容野を広くとる必要があるが、代表的な手法として、①層を深くする、②プーリング＋ストライドといった処理が挙げられる。<br>
+しかし、多層化の場合は計算負荷が大きいという課題があった。したがって、プーリングやストライドによって解像度を落とす必要があるが、そのうえで検知精度上げるためには<br>
+落とした解像度を復元する必要がある。この処理のことをUp-samplingと呼ぶ。<br>
+Up-saplingでは逆畳み込み（Deconvolution）と表現されることもあるが、poolingで失われた情報は復元されない。解像度上げる方法としてUp-samplingは一度に行うのではなく、<br>
+徐々に（例えば2倍ずつ）分けていき、低レイヤー層のpooling出力を要素ごとに加算することで輪郭情報を補完するやり方がある。
+</p>
